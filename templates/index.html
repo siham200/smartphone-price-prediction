@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédiction du prix des smartphones</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>📱 Prédiction du prix d'un smartphone</h1>
+        <p class="description">
+            Remplissez les caractéristiques du smartphone
+            pour estimer son prix.
+        </p>
+
+        <form method="POST">
+            <label for="brand">Marque :</label>
+            <input type="text" id="brand" name="brand"
+                   placeholder="Ex : Samsung" required>
+
+            <label for="ram">RAM (Go) :</label>
+            <input type="number" id="ram" name="ram"
+                   min="1" step="0.1" required>
+
+            <label for="battery">Batterie (mAh) :</label>
+            <input type="number" id="battery" name="battery"
+                   min="1" required>
+
+            <label for="camera">Caméra arrière (MP) :</label>
+            <input type="number" id="camera" name="camera"
+                   min="1" step="0.1" required>
+
+            <label for="screen_size">Taille de l'écran (pouces) :</label>
+            <input type="number" id="screen_size" name="screen_size"
+                   min="1" step="0.1" required>
+
+            <label for="launch_year">Année de lancement :</label>
+            <input type="number" id="launch_year" name="launch_year"
+                   min="2000" max="2035" required>
+
+            <button type="submit">Prédire le prix</button>
+        </form>
+
+        {% if prediction is not none %}
+            <div class="result">
+                <h2>Prix estimé</h2>
+                <p>{{ prediction }} USD</p>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
